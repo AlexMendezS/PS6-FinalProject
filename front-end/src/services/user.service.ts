@@ -94,7 +94,12 @@ export class UserService {
     for (const student of user) {
       if (student.studentNumber !== 0) {
         student.studentNumber = student.studentNumber - 1;
+        if(student.studentNumber == 1){
+          student.notif = "vous êtes le suivant !"
+        }
+        else student.notif = "Attendez votre tour svp"
       }
+      else student.notif = "Merci, au revoir !";
       this.log('' + student.studentNumber);
       this.updateStudent(student);
       this.getStudent();
