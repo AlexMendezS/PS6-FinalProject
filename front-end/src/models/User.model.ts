@@ -3,7 +3,7 @@ export class User {
 
     public studentNumber?: number,
     public name?: string,
-    public firstname?: string,
+    public firstName?: string,
     public status?: string,
     public notif?: string,
     public mail?: string,

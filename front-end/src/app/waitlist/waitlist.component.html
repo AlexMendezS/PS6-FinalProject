@@ -3,11 +3,37 @@
 </div>
 
 <div class="container-fluid">
-  <p>
-    Etudiant actuel :
-  </p>
 </div>
 
+<h1>Dossier en cours de traitement</h1>
+<div class="container-fluid">
+  <div class="container">
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+          <th scope="col">Action</th>
+          <th scope="col">Etudiant</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let merce of user">
+          <td  *ngIf="merce.studentNumber === 0"><button type="button" class="btn btn-primary" (click)="userService.incrementPosition(merce)">Confirmer</button></td>
+          <td  *ngIf="merce.studentNumber === 0">{{merce.name}} {{merce.firstName}}</td>
+
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <!--<ul>File d'attente :-->
+    <!--<li *ngFor="let merce of user">{{merce.name}}</li>-->
+    <!--</ul>-->
+
+  </div>
+</div>
+
+
+<h1>File d'attente</h1>
 <div class="container-fluid">
   <div class="container">
     <div class="table-responsive">
@@ -20,8 +46,8 @@
         </thead>
         <tbody>
         <tr *ngFor="let merce of user">
-          <td  *ngIf="merce.studentNumber !== 0">{{merce.studentNumber}}</td>
-          <td  *ngIf="merce.studentNumber !== 0">{{merce.name}}</td>
+          <td  *ngIf="merce.studentNumber > 0">{{merce.studentNumber}}</td>
+          <td  *ngIf="merce.studentNumber > 0">{{merce.name}}</td>
         </tr>
         </tbody>
       </table>
@@ -30,5 +56,32 @@
     <!--<li *ngFor="let merce of user">{{merce.name}}</li>-->
     <!--</ul>-->
     <button type="button" class="btn btn-secondary" (click)="userService.updatePosition(user)">Suivant</button>
+  </div>
+</div>
+
+<h1>Dossier traité</h1>
+<div class="container-fluid">
+  <div class="container">
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+          <th scope="col">Action</th>
+          <th scope="col">Etudiant</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let merce of user">
+          <td  *ngIf="merce.studentNumber === -1"><button type="button" class="btn btn-primary" (click)="userService.incrementPosition(merce)">Confirmer</button></td>
+          <td  *ngIf="merce.studentNumber === -1">{{merce.name}} {{merce.firstName}}</td>
+
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <!--<ul>File d'attente :-->
+    <!--<li *ngFor="let merce of user">{{merce.name}}</li>-->
+    <!--</ul>-->
+
   </div>
 </div>

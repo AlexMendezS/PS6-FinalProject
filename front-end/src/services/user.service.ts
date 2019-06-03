@@ -93,13 +93,13 @@ export class UserService {
 
     for (const student of user) {
       if (student.studentNumber !== 0) {
-        student.studentNumber = student.studentNumber - 1;
-        if(student.studentNumber == 1){
-          student.notif = "vous êtes le suivant !"
+        this.incrementPosition(student);
+        if (student.studentNumber === 1) {
+          student.notif = 'vous êtes le suivant !';
         }
-        else student.notif = "Attendez votre tour svp"
+        else student.notif = 'Attendez votre tour svp';
       }
-      else student.notif = "Merci, au revoir !";
+      else student.notif = 'Merci, au revoir !';
       this.log('' + student.studentNumber);
       this.updateStudent(student);
       this.getStudent();
@@ -108,11 +108,18 @@ export class UserService {
 
   }
 
+  incrementPosition(user: User) {
+    if (user.studentNumber !== -1) {
+      user.studentNumber = user.studentNumber - 1;
+    }
+  }
+
 
   /** Log a UserService message with the MessageService */
   private log(message: string) {
     console.log(message);
   }
+
   sortBy(field: string) {
     this.studentList.sort((a: any, b: any) => {
       if (a[field] < b[field]) {
