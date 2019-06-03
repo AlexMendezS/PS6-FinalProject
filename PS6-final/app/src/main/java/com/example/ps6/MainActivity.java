@@ -24,16 +24,13 @@ public class MainActivity extends AppCompatActivity {
     private TextView mTextViewResult;
     private RequestQueue requestQueue;
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Button buttonParse = findViewById(R.id.button_parse);
         mTextViewResult = findViewById(R.id.text_view_result);
-        String URL = "http://10.212.118.37:9428/api/students";
+        String URL = "http://10.212.115.202:9428/api/students";
 
         requestQueue = Volley.newRequestQueue(this);
 
