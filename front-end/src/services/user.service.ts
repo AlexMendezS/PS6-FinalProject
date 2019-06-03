@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs/index';
-import { User } from '../models/User.model';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import {User} from '../models/User.model';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {catchError, filter, take, tap} from 'rxjs/internal/operators';
-import { ErrorService } from './error';
-import { httpOptionsBase, serverUrl } from '../configs/server.config';
+import {ErrorService} from './error';
+import {httpOptionsBase, serverUrl} from '../configs/server.config';
 
 @Injectable({
   providedIn: 'root'
@@ -39,6 +39,8 @@ export class UserService {
       .subscribe((students: User[]) => {
         this.students$.next(students);
         this.studentList = students;
+
+        this.sortBy('studentNumber');
       });
   }
 
@@ -86,8 +88,35 @@ export class UserService {
   }
 
 
+  updatePosition(user: User[]) {
+
+
+    for (const student of user) {
+      if (student.studentNumber !== 0) {
+        student.studentNumber = student.studentNumber - 1;
+      }
+      this.log('' + student.studentNumber);
+      this.updateStudent(student);
+      this.getStudent();
+    }
+
+
+  }
+
+
   /** Log a UserService message with the MessageService */
   private log(message: string) {
     console.log(message);
+  }
+  sortBy(field: string) {
+    this.studentList.sort((a: any, b: any) => {
+      if (a[field] < b[field]) {
+        return -1;
+      } else if (a[field] > b[field]) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
   }
 }

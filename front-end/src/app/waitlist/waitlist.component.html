@@ -20,8 +20,8 @@
         </thead>
         <tbody>
         <tr *ngFor="let merce of user">
-          <td>{{merce.studentNumber}}</td>
-          <td>{{merce.name}}</td>
+          <td  *ngIf="merce.studentNumber !== 0">{{merce.studentNumber}}</td>
+          <td  *ngIf="merce.studentNumber !== 0">{{merce.name}}</td>
         </tr>
         </tbody>
       </table>
@@ -29,6 +29,6 @@
     <!--<ul>File d'attente :-->
     <!--<li *ngFor="let merce of user">{{merce.name}}</li>-->
     <!--</ul>-->
-    <button type="button" class="btn btn-secondary">Suivant</button>
+    <button type="button" class="btn btn-secondary" (click)="userService.updatePosition(user)">Suivant</button>
   </div>
 </div>

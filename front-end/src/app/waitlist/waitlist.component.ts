@@ -14,7 +14,7 @@ export class WaitlistComponent implements OnInit {
   user: User[];
   sortedUser: User[];
 
-  constructor(private userService: UserService) {
+  constructor(public userService: UserService) {
     this.getUser();
   }
 
