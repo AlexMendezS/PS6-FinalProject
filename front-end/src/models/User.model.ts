@@ -1,7 +1,7 @@
 export class User {
   constructor(
 
-    public studentNumber?: string,
+    public studentNumber?: number,
     public name?: string,
     public firstname?: string,
     public status?: string,

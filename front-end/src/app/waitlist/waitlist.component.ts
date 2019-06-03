@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 
+
 import {User} from '../../models/User.model';
 import {UserService} from '../../services/user.service';
 
@@ -11,6 +12,7 @@ import {UserService} from '../../services/user.service';
 export class WaitlistComponent implements OnInit {
 
   user: User[];
+  sortedUser: User[];
 
   constructor(private userService: UserService) {
     this.getUser();
