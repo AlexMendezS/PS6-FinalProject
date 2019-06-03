@@ -1,0 +1,21 @@
+.row-2{
+  font-weight: 700;
+  font-size: 35px;
+  background-color: darkblue;
+  color: white;
+  margin-left: -30px;
+  margin-right: -30px;
+}
+
+.container{
+  margin: 15px auto;
+  padding: 30px 30px;
+  font: 18px sans-serif;
+  border: 1px solid black;
+}
+
+.btn-secondary{
+  color: white;
+  background-color: darkblue;
+  font-size: 20px;
+}

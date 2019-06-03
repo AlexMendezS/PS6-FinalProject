@@ -1,16 +1,34 @@
-<p>
-  waitlist works!
-</p>
+<div class="row-2  ">
+  <p class="text-center">File d'attente</p>
+</div>
 
-<div class="container">
-  <div class="row">
-    <div class="col-md-6">
-      <button type="button" class="btn btn-dark">Suivant</button>
+<div class="container-fluid">
+  <p>
+    Etudiant actuel :
+  </p>
+</div>
+
+<div class="container-fluid">
+  <div class="container">
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+          <th scope="col">Numéro</th>
+          <th scope="col">Etudiant</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let merce of user">
+          <td>{{merce.studentNumber}}</td>
+          <td>{{merce.name}}</td>
+        </tr>
+        </tbody>
+      </table>
     </div>
-    <div class="col-md-6">
-      <ul>File d'attente :
-      <li *ngFor="let merce of user">{{merce.name}}</li>
-      </ul>
-    </div>
+    <!--<ul>File d'attente :-->
+    <!--<li *ngFor="let merce of user">{{merce.name}}</li>-->
+    <!--</ul>-->
+    <button type="button" class="btn btn-secondary">Suivant</button>
   </div>
 </div>
