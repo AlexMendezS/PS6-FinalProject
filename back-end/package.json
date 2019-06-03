@@ -1,0 +1,39 @@
+{
+  "name": "back-end-bri-charo-2.0",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app/index.js",
+    "dev": "./node_modules/.bin/nodemon app/index.js",
+    "lint": "./node_modules/.bin/eslint -c .eslintrc.js app/",
+    "lint:fix": "./node_modules/.bin/eslint -c .eslintrc.js app/ --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/FazulNazar/BRI-project"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "homepage": "https://github.com/FazulNazar/BRI-project",
+  "dependencies": {
+    "body-parser": "1.18.3",
+    "cors": "2.8.5",
+    "express": "4.16.4",
+    "joi": "14.3.1",
+    "morgan": "1.9.1"
+  },
+  "devDependencies": {
+    "eslint": "5.13.0",
+    "eslint-config-airbnb-base": "13.1.0",
+    "eslint-plugin-import": "2.16.0",
+    "nodemon": "1.18.10",
+    "pre-commit": "1.2.2"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "mocks/*"
+    ]
+  }
+}
