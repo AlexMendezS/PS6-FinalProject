@@ -49,7 +49,7 @@ public class InscriptionActivity extends AppCompatActivity implements AdapterVie
         name = findViewById(R.id.textnewname);
         studentNumber = findViewById(R.id.textnumetu);
         firstname = findViewById(R.id.textfirstname);
-        URL = "http://10.212.115.202:9428/api/students";
+        URL = "http://10.212.118.135:9428/api/students";
 
         requestQueue = Volley.newRequestQueue(this);
         Spinner spinner = findViewById(R.id.spinner1);

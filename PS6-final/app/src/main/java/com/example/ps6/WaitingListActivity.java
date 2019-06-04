@@ -48,9 +48,9 @@ public class WaitingListActivity extends AppCompatActivity {
         Button uploadbutton = findViewById(R.id.uploadButton);
         TextView mTextViewStudent = findViewById(R.id.tv_waitingliste);
         mylistView = findViewById(R.id.waiting_list);
-        URL = "http://10.212.115.202:9428/api/students";
+        URL = "http://10.212.118.135:9428/api/students";
 
-    //    requestQueue = Volley.newRequestQueue(this);
+        //    requestQueue = Volley.newRequestQueue(this);
         getStudents();
 
         uploadbutton.setOnClickListener(new View.OnClickListener() {
@@ -89,11 +89,15 @@ public class WaitingListActivity extends AppCompatActivity {
 
                                 //add a new student to list
 //                                studentItem.add(new user(studentNumbers[i], studentFirstNames[i], studentNames[i]));
-                                studentItem.add(new user(student.getInt("queue"), student.getString("firstName"), student.getString("name")));
+                                studentItem.add(new user(student.getInt("queue"), student.getString("firstName"), student.getString("name"), student.getString("educationStream")));
                             }
 
+
+                            //filter
+
                             //set the adapter
-                            StudentAdapter myadapter = new StudentAdapter(WaitingListActivity.this, R.layout.student, studentItem);
+
+                            StudentAdapter myadapter = new StudentAdapter(WaitingListActivity.this, R.layout.student, filterStudent("GE"));
                             mylistView.setAdapter(myadapter);
 
                         } catch (JSONException e) {
@@ -116,10 +120,19 @@ public class WaitingListActivity extends AppCompatActivity {
         requestQueue.add(arrayRequest);
 
 
-
-
     }
 
+    private ArrayList<user> filterStudent(String filiere) {
+        ArrayList<user> studentItemFiltered = new ArrayList<>();
+        for (int i = 0; i < studentItem.size(); i++) {
+            if (studentItem.get(i).getEducationStream().equals(filiere+"3") || studentItem.get(i).getEducationStream().equals(filiere+"4")) {
+                studentItemFiltered.add(studentItem.get(i));
+            }
+
+        }
+        return studentItemFiltered;
+
+    }
 
 
 }

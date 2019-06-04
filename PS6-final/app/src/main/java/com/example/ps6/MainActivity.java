@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Button buttonParse = findViewById(R.id.button_parse);
         mTextViewResult = findViewById(R.id.text_view_result);
-        URL = "http://10.212.115.202:9428/api/students";
+        URL = "http://10.212.118.135:9428/api/students";
 
         requestQueue = Volley.newRequestQueue(this);
 
