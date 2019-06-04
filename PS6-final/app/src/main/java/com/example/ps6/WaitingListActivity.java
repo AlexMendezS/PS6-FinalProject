@@ -5,8 +5,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,12 +30,16 @@ import java.util.List;
 import adapter.StudentAdapter;
 import model.user;
 
-public class WaitingListActivity extends AppCompatActivity {
+public class WaitingListActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     //private RequestQueue requestQueue;
     private String URL;
     private ArrayList<user> studentItem;
     private ListView mylistView;
+
+    private Spinner spinner;
+    private String filiere;
+
     private int[] studentNumbers;
     private String[] studentFirstNames;
     private String[] studentNames;
@@ -46,8 +53,16 @@ public class WaitingListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_waitinglist);
         Button nextbutton = findViewById(R.id.nextButton);
         Button uploadbutton = findViewById(R.id.uploadButton);
-        TextView mTextViewStudent = findViewById(R.id.tv_waitingliste);
         mylistView = findViewById(R.id.waiting_list);
+
+        Spinner spinner = findViewById(R.id.spinner2);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.filiereBRI, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(this);
+
+
         URL = "http://10.212.118.135:9428/api/students";
 
         //    requestQueue = Volley.newRequestQueue(this);
@@ -97,7 +112,7 @@ public class WaitingListActivity extends AppCompatActivity {
 
                             //set the adapter
 
-                            StudentAdapter myadapter = new StudentAdapter(WaitingListActivity.this, R.layout.student, filterStudent("GE"));
+                            StudentAdapter myadapter = new StudentAdapter(WaitingListActivity.this, R.layout.student, filterStudent(filiere));
                             mylistView.setAdapter(myadapter);
 
                         } catch (JSONException e) {
@@ -124,13 +139,29 @@ public class WaitingListActivity extends AppCompatActivity {
 
     private ArrayList<user> filterStudent(String filiere) {
         ArrayList<user> studentItemFiltered = new ArrayList<>();
+        if(filiere.equals("ALL")){return studentItem;}
         for (int i = 0; i < studentItem.size(); i++) {
-            if (studentItem.get(i).getEducationStream().equals(filiere+"3") || studentItem.get(i).getEducationStream().equals(filiere+"4")) {
+            if (studentItem.get(i).getEducationStream().equals(filiere)) {
                 studentItemFiltered.add(studentItem.get(i));
             }
 
         }
         return studentItemFiltered;
+
+
+
+    }
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        String text = parent.getItemAtPosition(position).toString();
+
+        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
+        filiere = text;
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
 
     }
 

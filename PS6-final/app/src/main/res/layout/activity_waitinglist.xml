@@ -26,15 +26,18 @@
             <!--app:srcCompat="@drawable/foodget" />-->
 
         <LinearLayout
+            android:paddingTop="@dimen/fab_padding"
+            android:background="@color/theme1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/theme1"
-            android:paddingTop="@dimen/fab_padding">
+            android:paddingBottom="@dimen/fab_padding">
 
             <TextView
-                android:id="@+id/tv_waitingliste"
                 style="@style/textView_Style"
-                tools:text="LISTE D'ATTENTE BRI" />
+                android:textSize="30dp"
+                android:text="Liste d'attente "
+                android:textStyle="bold"
+                />
 
 
 
@@ -42,34 +45,40 @@
 
         <LinearLayout
             android:background="@color/theme1d"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <TextView
+                android:layout_marginLeft="10dp"
+                android:textSize="30dp"
+                android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#FFF"
-
-                tools:text="Filiere : " />
+                android:text="Filiere"
+                />
 
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="20dp"
                 android:background="@color/theme1t"
+
                 android:layout_gravity="center">
+
                 <Spinner
-                    android:id="@+id/spinner1"
+                    android:id="@+id/spinner2"
                     android:layout_width="wrap_content"
                     android:layout_gravity="center"
-                    android:outlineAmbientShadowColor="@color/theme1"
-                    android:outlineSpotShadowColor="@color/theme1"
                     android:layout_height="wrap_content"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
             </LinearLayout>
 
         </LinearLayout>
@@ -102,7 +111,7 @@
                 android:layout_width="145dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:backgroundTint="@color/colorPrimary"
+                android:backgroundTint="@color/theme1l"
                 android:text="Actualiser" />
 
             <Button
@@ -110,7 +119,8 @@
                 style="@style/buttonStyle"
                 android:layout_width="171dp"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/colorPrimary"
+                android:backgroundTint="@color/theme1"
+
                 android:text="Suivant" />
 
         </LinearLayout>
