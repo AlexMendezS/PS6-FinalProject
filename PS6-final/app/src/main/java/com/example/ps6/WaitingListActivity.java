@@ -175,11 +175,13 @@ public class WaitingListActivity extends AppCompatActivity implements AdapterVie
         ArrayList<user> studentItemFiltered = new ArrayList<>();
         if (filiere.equals("ALL")) {
             studentItemFiltered = studentItem;
-            mTextViewStudent.append("Etudiant en cours de traitement: \n" + studentItemFiltered.get(0).getFirstName() + " " + studentItemFiltered.get(0).getName());
             if (studentItemFiltered.size() != 0) {
+                mTextViewStudent.append("Etudiant en cours de traitement: \n" + studentItemFiltered.get(0).getFirstName() + " " + studentItemFiltered.get(0).getName());
                 IDtoDelete = studentItemFiltered.get(0).getId();
             }
-            else{IDtoDelete = -1;}
+            else{IDtoDelete = -1;
+
+                mTextViewStudent.append("Aucun étudiant en cours de traiement ");}
 
             return studentItem;
         }
@@ -190,12 +192,14 @@ public class WaitingListActivity extends AppCompatActivity implements AdapterVie
 
         }
 
-        IDtoDelete = studentItemFiltered.get(0).getId();
 
-        if (studentItemFiltered.size() == 0) {
-            mTextViewStudent.append("Aucun étudiant en cours de traiement ");
-        } else {
+        if (studentItemFiltered.size() != 0) {
+            IDtoDelete = studentItemFiltered.get(0).getId();
+
             mTextViewStudent.append("Etudiant en cours de traitement: \n" + studentItemFiltered.get(0).getFirstName() + " " + studentItemFiltered.get(0).getName());
+        }
+        else  {
+            mTextViewStudent.append("Aucun étudiant en cours de traiement ");
         }
 
         return studentItemFiltered;
