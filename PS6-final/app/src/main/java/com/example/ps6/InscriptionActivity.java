@@ -42,7 +42,7 @@ public class InscriptionActivity extends AppCompatActivity {
         inscriptionButton = findViewById(R.id.inscriptionButton);
         name = findViewById(R.id.textnewname);
         firstname = findViewById(R.id.textfirstname);
-        URL = "http://10.212.115.202:9428/api/students";
+        URL = "http://192.168.1.69:9428/api/students";
 
         requestQueue = Volley.newRequestQueue(this);
 
@@ -63,9 +63,9 @@ public class InscriptionActivity extends AppCompatActivity {
                 }
                 JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
                         URL, postparams,
-                        new Response.Listener() {
+                        new Response.Listener<JSONObject>() {
                             @Override
-                            public void onResponse(Object response) {
+                            public void onResponse(JSONObject response) {
                                 Log.d("Response", response.toString());
                                 Toast.makeText(InscriptionActivity.this, "Etudiant ajouté à la liste d'attente", Toast.LENGTH_SHORT).show();
                             }
@@ -73,16 +73,16 @@ public class InscriptionActivity extends AppCompatActivity {
                         new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
-                                Log.d("Response", error.toString());
-
+                                Log.e("Error", error.toString());
+                                error.printStackTrace();
                             }
                         });
 
                 requestQueue.add(jsonObjReq);
 
 
-//                Intent newIntent = new Intent(InscriptionActivity.this, MainActivity.class);
-//                startActivity(newIntent);
+                Intent newIntent = new Intent(InscriptionActivity.this, MainActivity.class);
+                startActivity(newIntent);
 
             }
         });
