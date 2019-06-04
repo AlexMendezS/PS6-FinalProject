@@ -20,4 +20,3 @@ module.exports = new BaseModel('Student', {
   phone: Joi.string(),
   educationStream: Joi.string(),
 });
-
