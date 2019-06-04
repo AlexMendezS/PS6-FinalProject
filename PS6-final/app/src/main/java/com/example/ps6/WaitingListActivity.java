@@ -36,8 +36,8 @@ public class WaitingListActivity extends AppCompatActivity {
     private int[] studentNumbers;
     private String[] studentFirstNames;
     private String[] studentNames;
-    private int IDtoDelete;
-    private String test;
+    private long IDtoDelete;
+    private int test;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +51,7 @@ public class WaitingListActivity extends AppCompatActivity {
         TextView mTextViewStudent = findViewById(R.id.tv_waitingliste);
         mylistView = findViewById(R.id.waiting_list);
         URLGET = "http://10.212.115.202:9428/api/students";
-        URLDELETE = URLGET + "/" + IDtoDelete;
+        URLDELETE = URLGET + "/" + Long.toString(IDtoDelete);
 
         getStudents();
         uploadbutton.setOnClickListener(new View.OnClickListener() {
@@ -64,6 +64,7 @@ public class WaitingListActivity extends AppCompatActivity {
         nextbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                getStudents();
                 uploadQueue();
             }
         });
@@ -76,12 +77,12 @@ public class WaitingListActivity extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         JsonArrayRequest arrayRequest = new JsonArrayRequest(
                 Request.Method.DELETE,
-                URLDELETE,
+                URLGET + Long.toString(IDtoDelete),
                 null,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Toast.makeText(WaitingListActivity.this, "student deleted", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(WaitingListActivity.this, "étudiant supprimé", Toast.LENGTH_SHORT).show();
                         Log.d("Response", response.toString());
                     }
                 },
@@ -117,11 +118,13 @@ public class WaitingListActivity extends AppCompatActivity {
 
                                 //add a new student to list
 //                                studentItem.add(new user(studentNumbers[i], studentFirstNames[i], studentNames[i]));
-                                studentItem.add(new user(student.getInt("queue"), student.getString("firstName"), student.getString("name"), student.getInt("id")));
+                                studentItem.add(new user(student.getInt("queue"), student.getString("firstName"), student.getString("name"), student.getLong("id")));
 //                                Collections.reverse(studentItem);
-                                IDtoDelete = studentItem.get(0).getId();
-                                test= studentItem.get(0).getName();
+//                                test= studentItem.get(0).getName();
                             }
+                            IDtoDelete = studentItem.get(0).getId();
+//                            test = studentItem.get(0).getQueueNumber();
+
 
                             //set the adapter
                             StudentAdapter myadapter = new StudentAdapter(WaitingListActivity.this, R.layout.student, studentItem);
@@ -146,11 +149,7 @@ public class WaitingListActivity extends AppCompatActivity {
 
         requestQueue.add(arrayRequest);
 
-
-
-
     }
-
 
 
 }

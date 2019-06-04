@@ -5,9 +5,9 @@ public class user {
     private int queueNumber;
     private String firstName;
     private String name;
-    private int id;
+    private long id;
 
-    public user (int queueNumber, String firstName, String name, int id){
+    public user (int queueNumber, String firstName, String name, long id){
         this.queueNumber = queueNumber;
         this.firstName = firstName;
         this.name = name;
@@ -26,6 +26,6 @@ public class user {
         return name;
     }
 
-    public int getId() { return id; }
+    public long getId() { return id; }
 
 }
