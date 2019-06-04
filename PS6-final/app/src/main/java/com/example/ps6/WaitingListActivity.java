@@ -37,6 +37,7 @@ public class WaitingListActivity extends AppCompatActivity implements AdapterVie
     private String URLDELETE;
     private ArrayList<user> studentItem;
     private ListView mylistView;
+    ArrayList<user> studentItemFiltered;
 
     private Spinner spinner;
     private String filiere;
@@ -141,7 +142,7 @@ public class WaitingListActivity extends AppCompatActivity implements AdapterVie
 
 
                             //filter
-                            IDtoDelete = studentItem.get(0).getId();
+
 //                            test = studentItem.get(0).getQueueNumber();
 
 
@@ -174,13 +175,19 @@ public class WaitingListActivity extends AppCompatActivity implements AdapterVie
 
     private ArrayList<user> filterStudent(String filiere) {
         ArrayList<user> studentItemFiltered = new ArrayList<>();
-        if(filiere.equals("ALL")){return studentItem;}
+        if(filiere.equals("ALL")){
+            studentItemFiltered = studentItem;
+
+            IDtoDelete = studentItemFiltered.get(0).getId();
+            return studentItem;}
         for (int i = 0; i < studentItem.size(); i++) {
             if (studentItem.get(i).getEducationStream().equals(filiere)) {
                 studentItemFiltered.add(studentItem.get(i));
             }
 
         }
+
+        IDtoDelete = studentItemFiltered.get(0).getId();
         return studentItemFiltered;
 
 
