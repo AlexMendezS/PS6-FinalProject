@@ -135,7 +135,7 @@
                 style="@style/buttonStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/theme1d"
+                android:backgroundTint="@color/design_default_color_primary_dark"
                 android:text="S'inscrire" />
 
         </LinearLayout>

@@ -29,8 +29,8 @@ public class WelcomeActivity extends AppCompatActivity {
         admin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent NewMainActivity = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(NewMainActivity);
+                Intent NewAdminActivity = new Intent(getApplicationContext(), AdminActivity.class);
+                startActivity(NewAdminActivity);
             }
         });
     }
