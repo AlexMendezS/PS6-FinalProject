@@ -38,6 +38,7 @@ public class WaitingListActivity extends AppCompatActivity implements AdapterVie
     private ArrayList<user> studentItem;
     private ListView mylistView;
     ArrayList<user> studentItemFiltered;
+    TextView mTextViewStudent;
 
     private Spinner spinner;
     private String filiere;
@@ -56,8 +57,8 @@ public class WaitingListActivity extends AppCompatActivity implements AdapterVie
         studentItem = new ArrayList<>();
         setContentView(R.layout.activity_waitinglist);
         Button nextbutton = findViewById(R.id.nextButton);
-        Button uploadbutton = findViewById(R.id.uploadButton);
         mylistView = findViewById(R.id.waiting_list);
+        mTextViewStudent = findViewById(R.id.tv_student);
 
         Spinner spinner = findViewById(R.id.spinner2);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -67,16 +68,12 @@ public class WaitingListActivity extends AppCompatActivity implements AdapterVie
         spinner.setOnItemSelectedListener(this);
 
 
-        URL = "http://10.212.118.135:9428/api/students";
-        URLGET = "http://10.212.118.135:9428/api/students";
+        URL = "http://10.212.118.37:9428/api/students";
+        URLGET = "http://10.212.118.37:9428/api/students";
         URLDELETE = URLGET + "/" + Long.toString(IDtoDelete);
+        getStudents();
 
-        uploadbutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getStudents();
-            }
-        });
+
 
         nextbutton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,7 +86,7 @@ public class WaitingListActivity extends AppCompatActivity implements AdapterVie
     }
 
     private void uploadQueue() {
-        getStudents();
+        //getStudents();
         Log.e("test", "" + IDtoDelete);
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         JsonArrayRequest arrayRequest = new JsonArrayRequest(
@@ -99,7 +96,7 @@ public class WaitingListActivity extends AppCompatActivity implements AdapterVie
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Toast.makeText(WaitingListActivity.this, "étudiant supprimé", Toast.LENGTH_SHORT).show();
+                      //  Toast.makeText(WaitingListActivity.this, "étudiant supprimé", Toast.LENGTH_SHORT).show();
                         Log.d("Response", response.toString());
                     }
                 },
@@ -112,6 +109,9 @@ public class WaitingListActivity extends AppCompatActivity implements AdapterVie
                 }
         );
         requestQueue.add(arrayRequest);
+        mTextViewStudent.setText("");
+        getStudents();
+
 
     }
 
@@ -147,7 +147,7 @@ public class WaitingListActivity extends AppCompatActivity implements AdapterVie
 
 
                             //set the adapter
-
+                            mTextViewStudent.append("Etudiant en cours de traitement"+studentItem.get(0).getFirstName()+" "+studentItem.get(0).getFirstName());
                             StudentAdapter myadapter = new StudentAdapter(WaitingListActivity.this, R.layout.student, filterStudent(filiere));
                             mylistView.setAdapter(myadapter);
 
