@@ -96,7 +96,7 @@ public class WaitingListActivity extends AppCompatActivity implements AdapterVie
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                      //  Toast.makeText(WaitingListActivity.this, "étudiant supprimé", Toast.LENGTH_SHORT).show();
+                        //  Toast.makeText(WaitingListActivity.this, "étudiant supprimé", Toast.LENGTH_SHORT).show();
                         Log.d("Response", response.toString());
                     }
                 },
@@ -116,6 +116,7 @@ public class WaitingListActivity extends AppCompatActivity implements AdapterVie
     }
 
     private void getStudents() {
+        mTextViewStudent.setText("");
         studentItem.clear();
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         JsonArrayRequest arrayRequest = new JsonArrayRequest(
@@ -140,14 +141,12 @@ public class WaitingListActivity extends AppCompatActivity implements AdapterVie
 //                                test= studentItem.get(0).getName();
                             }
 
-
                             //filter
 
 //                            test = studentItem.get(0).getQueueNumber();
 
-
                             //set the adapter
-                            mTextViewStudent.append("Etudiant en cours de traitement: \n"+studentItem.get(0).getFirstName()+" "+studentItem.get(0).getName());
+//                            mTextViewStudent.append("Etudiant en cours de traitement: \n"+studentItem.get(0).getFirstName()+" "+studentItem.get(0).getName());
                             StudentAdapter myadapter = new StudentAdapter(WaitingListActivity.this, R.layout.student, filterStudent(filiere));
                             mylistView.setAdapter(myadapter);
 
@@ -170,15 +169,15 @@ public class WaitingListActivity extends AppCompatActivity implements AdapterVie
 
         requestQueue.add(arrayRequest);
 
-
     }
 
     private ArrayList<user> filterStudent(String filiere) {
         ArrayList<user> studentItemFiltered = new ArrayList<>();
         if(filiere.equals("ALL")){
             studentItemFiltered = studentItem;
-
+            mTextViewStudent.append("Etudiant en cours de traitement: \n"+studentItemFiltered.get(0).getFirstName()+" "+studentItemFiltered.get(0).getName());
             IDtoDelete = studentItemFiltered.get(0).getId();
+
             return studentItem;}
         for (int i = 0; i < studentItem.size(); i++) {
             if (studentItem.get(i).getEducationStream().equals(filiere)) {
@@ -188,6 +187,9 @@ public class WaitingListActivity extends AppCompatActivity implements AdapterVie
         }
 
         IDtoDelete = studentItemFiltered.get(0).getId();
+
+        mTextViewStudent.append("Etudiant en cours de traitement: \n"+studentItemFiltered.get(0).getFirstName()+" "+studentItemFiltered.get(0).getName());
+
         return studentItemFiltered;
 
 
