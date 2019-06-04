@@ -6,11 +6,7 @@
     android:orientation="horizontal"
     android:weightSum="100">
 
-    <Button
-        android:id="@+id/deleteStudent"
-        android:layout_width="48dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="43" />
+
         <!--android:drawableStart="@drawable/trash_can" -->
 
     <TextView

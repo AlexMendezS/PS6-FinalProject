@@ -53,7 +53,7 @@ public class StudentAdapter extends ArrayAdapter<user> {
 
         TextView tvName = view.findViewById(R.id.nameView);
         TextView tvNumber = view.findViewById(R.id.numberView);
-        Button tvButton = view.findViewById(R.id.deleteStudent);
+      //  Button tvButton = view.findViewById(R.id.deleteStudent);
 
 //        tvButton.setOnClickListener(new View.OnClickListener() {
 //            @Override
