@@ -33,6 +33,7 @@ import model.user;
 public class WaitingListActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private String URLGET;
+    private String URL;
     private String URLDELETE;
     private ArrayList<user> studentItem;
     private ListView mylistView;
@@ -66,10 +67,9 @@ public class WaitingListActivity extends AppCompatActivity implements AdapterVie
 
 
         URL = "http://10.212.118.135:9428/api/students";
-        URLGET = "http://10.212.115.202:9428/api/students";
+        URLGET = "http://10.212.118.135:9428/api/students";
         URLDELETE = URLGET + "/" + Long.toString(IDtoDelete);
 
-        getStudents();
         uploadbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -134,8 +134,7 @@ public class WaitingListActivity extends AppCompatActivity implements AdapterVie
 
                                 //add a new student to list
 //                                studentItem.add(new user(studentNumbers[i], studentFirstNames[i], studentNames[i]));
-                                studentItem.add(new user(student.getInt("queue"), student.getString("firstName"), student.getString("name"), student.getString("educationStream")));
-                                studentItem.add(new user(student.getInt("queue"), student.getString("firstName"), student.getString("name"), student.getLong("id")));
+                                studentItem.add(new user(student.getInt("queue"), student.getString("firstName"), student.getString("name"), student.getString("educationStream"), student.getLong("id")));
 //                                Collections.reverse(studentItem);
 //                                test= studentItem.get(0).getName();
                             }
@@ -193,6 +192,7 @@ public class WaitingListActivity extends AppCompatActivity implements AdapterVie
 
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
         filiere = text;
+        getStudents();
 
     }
 
