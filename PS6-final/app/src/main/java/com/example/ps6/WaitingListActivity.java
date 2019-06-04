@@ -18,6 +18,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
@@ -25,15 +26,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
-
+import java.util.Collections;
 import adapter.StudentAdapter;
 import model.user;
 
 public class WaitingListActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    //private RequestQueue requestQueue;
-    private String URL;
+    private String URLGET;
+    private String URLDELETE;
     private ArrayList<user> studentItem;
     private ListView mylistView;
 
@@ -43,6 +43,8 @@ public class WaitingListActivity extends AppCompatActivity implements AdapterVie
     private int[] studentNumbers;
     private String[] studentFirstNames;
     private String[] studentNames;
+    private long IDtoDelete;
+    private int test;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,10 +66,10 @@ public class WaitingListActivity extends AppCompatActivity implements AdapterVie
 
 
         URL = "http://10.212.118.135:9428/api/students";
+        URLGET = "http://10.212.115.202:9428/api/students";
+        URLDELETE = URLGET + "/" + Long.toString(IDtoDelete);
 
-        //    requestQueue = Volley.newRequestQueue(this);
         getStudents();
-
         uploadbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,12 +77,40 @@ public class WaitingListActivity extends AppCompatActivity implements AdapterVie
             }
         });
 
-//        nextbutton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                uploadStudents();
-//            }
-//        });
+        nextbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                getStudents();
+                uploadQueue();
+            }
+        });
+
+    }
+
+    private void uploadQueue() {
+        getStudents();
+        Log.e("test", "" + IDtoDelete);
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        JsonArrayRequest arrayRequest = new JsonArrayRequest(
+                Request.Method.DELETE,
+                URLGET + Long.toString(IDtoDelete),
+                null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        Toast.makeText(WaitingListActivity.this, "étudiant supprimé", Toast.LENGTH_SHORT).show();
+                        Log.d("Response", response.toString());
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e("Error", error.toString());
+                        error.printStackTrace();
+                    }
+                }
+        );
+        requestQueue.add(arrayRequest);
 
     }
 
@@ -89,7 +119,7 @@ public class WaitingListActivity extends AppCompatActivity implements AdapterVie
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         JsonArrayRequest arrayRequest = new JsonArrayRequest(
                 Request.Method.GET,
-                URL,
+                URLGET,
                 null,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -105,10 +135,16 @@ public class WaitingListActivity extends AppCompatActivity implements AdapterVie
                                 //add a new student to list
 //                                studentItem.add(new user(studentNumbers[i], studentFirstNames[i], studentNames[i]));
                                 studentItem.add(new user(student.getInt("queue"), student.getString("firstName"), student.getString("name"), student.getString("educationStream")));
+                                studentItem.add(new user(student.getInt("queue"), student.getString("firstName"), student.getString("name"), student.getLong("id")));
+//                                Collections.reverse(studentItem);
+//                                test= studentItem.get(0).getName();
                             }
 
 
                             //filter
+                            IDtoDelete = studentItem.get(0).getId();
+//                            test = studentItem.get(0).getQueueNumber();
+
 
                             //set the adapter
 

@@ -19,4 +19,5 @@ module.exports = new BaseModel('Student', {
   city: Joi.string(),
   phone: Joi.string(),
   educationStream: Joi.string(),
+  id: Joi.number().integer(),
 });
