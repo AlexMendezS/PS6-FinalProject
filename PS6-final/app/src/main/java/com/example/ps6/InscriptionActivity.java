@@ -26,18 +26,27 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import adapter.StudentAdapter;
+import model.user;
 
 public class InscriptionActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private EditText name;
     private EditText firstname;
     private EditText studentNumber;
     private String filiere;
+    private int position;
     private Spinner spinner;
     private Button inscriptionButton;
     private RequestQueue requestQueue;
     private String URL;
+
+
+    private ArrayList<user> studentItem;
+    ArrayList<user> studentItemFiltered;
 
 
     @Override
@@ -46,6 +55,7 @@ public class InscriptionActivity extends AppCompatActivity implements AdapterVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inscription);
         inscriptionButton = findViewById(R.id.inscriptionButton);
+        studentItem = new ArrayList<>();
         name = findViewById(R.id.textnewname);
         studentNumber = findViewById(R.id.textnumetu);
         firstname = findViewById(R.id.textfirstname);
@@ -59,14 +69,17 @@ public class InscriptionActivity extends AppCompatActivity implements AdapterVie
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
 
+        getStudents();
+
         inscriptionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                filterStudent(filiere);
+                position = studentItemFiltered.size();
 
                 JSONObject postparams = new JSONObject();
                 try {
                     postparams.put("firstName", firstname.getText().toString());
-                    postparams.put("queue", -2);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -87,6 +100,13 @@ public class InscriptionActivity extends AppCompatActivity implements AdapterVie
                     postparams.put("studentNumber",  num);
                 } catch (JSONException e) {
                     e.printStackTrace();
+                }try {
+                    position = position + 1;
+
+                    postparams.put("queue",  position);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
                 JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
                         URL, postparams,
@@ -94,7 +114,7 @@ public class InscriptionActivity extends AppCompatActivity implements AdapterVie
                             @Override
                             public void onResponse(JSONObject response) {
                                 Log.d("Response", response.toString());
-                                Toast.makeText(InscriptionActivity.this, "Etudiant ajouté à la liste d'attente", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(InscriptionActivity.this, "Position dans la file d'attente : "+position, Toast.LENGTH_LONG).show();
                             }
                         },
                         new Response.ErrorListener() {
@@ -108,7 +128,8 @@ public class InscriptionActivity extends AppCompatActivity implements AdapterVie
                 requestQueue.add(jsonObjReq);
 
 
-                Intent newIntent = new Intent(InscriptionActivity.this, StudentActivity.class);
+
+                Intent newIntent = new Intent(InscriptionActivity.this, WelcomeActivity.class);
                 startActivity(newIntent);
 
             }
@@ -116,6 +137,82 @@ public class InscriptionActivity extends AppCompatActivity implements AdapterVie
 
 
     }
+
+
+    private void getStudents() {
+        studentItem.clear();
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        JsonArrayRequest arrayRequest = new JsonArrayRequest(
+                Request.Method.GET,
+                URL,
+                null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        try {
+                            for (int i = 0; i < response.length(); i++) {
+                                JSONObject student = response.getJSONObject(i);
+
+//                                studentNumbers[i] = student.getInt("studentNumber");
+//                                studentFirstNames[i] = student.getString("firstName");
+//                                studentNames[i] = student.getString("name");
+
+                                //add a new student to list
+//                                studentItem.add(new user(studentNumbers[i], studentFirstNames[i], studentNames[i]));
+                                studentItem.add(new user(student.getInt("queue"), student.getString("firstName"), student.getString("name"), student.getString("educationStream"), student.getLong("id")));
+//                                Collections.reverse(studentItem);
+//                                test= studentItem.get(0).getName();
+                            }
+
+
+                            //filter
+
+//                            test = studentItem.get(0).getQueueNumber();
+
+
+                            //set the adapter
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        Log.d("Response", response.toString());
+                        Toast.makeText(InscriptionActivity.this, "Liste d'attente actualisée", Toast.LENGTH_SHORT).show();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e("Error", error.toString());
+                        error.printStackTrace();
+                    }
+                }
+        );
+
+        requestQueue.add(arrayRequest);
+    }
+
+    private ArrayList<user> filterStudent(String filiere) {
+        studentItemFiltered = new ArrayList<>();
+        if(filiere.equals("ALL")){
+            studentItemFiltered = studentItem;
+
+            return studentItem;}
+        for (int i = 0; i < studentItem.size(); i++) {
+            if (studentItem.get(i).getEducationStream().equals(filiere)) {
+                studentItemFiltered.add(studentItem.get(i));
+            }
+
+        }
+
+        return studentItemFiltered;
+
+
+
+    }
+
+
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         String text = parent.getItemAtPosition(position).toString();
