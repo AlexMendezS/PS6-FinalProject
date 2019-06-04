@@ -5,8 +5,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,9 +29,12 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class InscriptionActivity extends AppCompatActivity {
+public class InscriptionActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private EditText name;
     private EditText firstname;
+    private EditText studentNumber;
+    private String filiere;
+    private Spinner spinner;
     private Button inscriptionButton;
     private RequestQueue requestQueue;
     private String URL;
@@ -41,10 +47,17 @@ public class InscriptionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_inscription);
         inscriptionButton = findViewById(R.id.inscriptionButton);
         name = findViewById(R.id.textnewname);
+        studentNumber = findViewById(R.id.textnumetu);
         firstname = findViewById(R.id.textfirstname);
         URL = "http://192.168.1.69:9428/api/students";
 
         requestQueue = Volley.newRequestQueue(this);
+        Spinner spinner = findViewById(R.id.spinner1);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.filiere, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(this);
 
         inscriptionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,11 +66,25 @@ public class InscriptionActivity extends AppCompatActivity {
                 JSONObject postparams = new JSONObject();
                 try {
                     postparams.put("firstName", firstname.getText().toString());
+                    postparams.put("queue", -2);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
                 try {
+                    postparams.put("educationStream", filiere);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                try {
                     postparams.put("name", name.getText().toString());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    int num = Integer.parseInt(studentNumber.getText().toString());
+
+                    postparams.put("studentNumber",  num);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -87,6 +114,17 @@ public class InscriptionActivity extends AppCompatActivity {
             }
         });
 
+
+    }
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        String text = parent.getItemAtPosition(position).toString();
+        filiere = text;
+        Toast.makeText(parent.getContext(), text, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
 
     }
 }

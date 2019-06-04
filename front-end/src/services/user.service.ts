@@ -39,9 +39,9 @@ export class UserService {
       .subscribe((students: User[]) => {
         this.students$.next(students);
         this.studentList = students;
-
         this.sortBy('studentNumber');
       });
+
   }
 
   getStudentsByObservable(): Observable<User[]> {
