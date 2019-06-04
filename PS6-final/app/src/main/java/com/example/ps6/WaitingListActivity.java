@@ -48,7 +48,6 @@ public class WaitingListActivity extends AppCompatActivity implements AdapterVie
     private String[] studentFirstNames;
     private String[] studentNames;
     private long IDtoDelete;
-    private int test;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,8 +71,6 @@ public class WaitingListActivity extends AppCompatActivity implements AdapterVie
         URL = "http://10.212.118.135:9428/api/students";
         URLGET = "http://10.212.118.135:9428/api/students";
         URLDELETE = URLGET + "/" + Long.toString(IDtoDelete);
-        //getStudents();
-
 
         nextbutton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -136,17 +133,12 @@ public class WaitingListActivity extends AppCompatActivity implements AdapterVie
 
                                 //add a new student to list
 //                                studentItem.add(new user(studentNumbers[i], studentFirstNames[i], studentNames[i]));
-                                studentItem.add(new user(student.getInt("queue"), student.getString("firstName"), student.getString("name"), student.getString("educationStream"), student.getLong("id")));
-//                                Collections.reverse(studentItem);
-//                                test= studentItem.get(0).getName();
+//                                studentItem.add(new user(student.getInt("queue"), student.getString("firstName"), student.getString("name"), student.getString("educationStream"), student.getLong("id")));
+                                studentItem.add(new user(i+1, student.getString("firstName"), student.getString("name"), student.getString("educationStream"), student.getLong("id")));
+
                             }
 
-                            //filter
-
-//                            test = studentItem.get(0).getQueueNumber();
-
                             //set the adapter
-//                            mTextViewStudent.append("Etudiant en cours de traitement: \n"+studentItem.get(0).getFirstName()+" "+studentItem.get(0).getName());
                             StudentAdapter myadapter = new StudentAdapter(WaitingListActivity.this, R.layout.student, filterStudent(filiere));
                             mylistView.setAdapter(myadapter);
 
