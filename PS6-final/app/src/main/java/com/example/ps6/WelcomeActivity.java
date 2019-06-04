@@ -29,7 +29,7 @@ public class WelcomeActivity extends AppCompatActivity {
         admin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent NewAdminActivity = new Intent(getApplicationContext(), AdminActivity.class);
+                Intent NewAdminActivity = new Intent(getApplicationContext(), WaitingListActivity.class);
                 startActivity(NewAdminActivity);
             }
         });
