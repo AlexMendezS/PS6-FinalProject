@@ -23,21 +23,21 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
-
+import java.util.Collections;
 import adapter.StudentAdapter;
 import model.user;
 
 public class WaitingListActivity extends AppCompatActivity {
 
-    //private RequestQueue requestQueue;
-    private String URL;
-    private String url;
+    private String URLGET;
+    private String URLDELETE;
     private ArrayList<user> studentItem;
     private ListView mylistView;
     private int[] studentNumbers;
     private String[] studentFirstNames;
     private String[] studentNames;
+    private int IDtoDelete;
+    private String test;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,30 +50,10 @@ public class WaitingListActivity extends AppCompatActivity {
         Button uploadbutton = findViewById(R.id.uploadButton);
         TextView mTextViewStudent = findViewById(R.id.tv_waitingliste);
         mylistView = findViewById(R.id.waiting_list);
-        URL = "http://10.212.115.202:9428/api/students";
-        url = "http://10.212.115.202:9428/api/students/1559649501951";
+        URLGET = "http://10.212.115.202:9428/api/students";
+        URLDELETE = URLGET + "/" + IDtoDelete;
 
-    //    requestQueue = Volley.newRequestQueue(this);
         getStudents();
-
-        nextbutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new JsonObjectRequest(Request.Method.DELETE, url, null, new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-
-                        Toast.makeText(WaitingListActivity.this, "deleted", Toast.LENGTH_SHORT).show();
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        error.printStackTrace();
-                    }
-                });
-            }
-        });
-
         uploadbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,12 +61,39 @@ public class WaitingListActivity extends AppCompatActivity {
             }
         });
 
-//        nextbutton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                uploadStudents();
-//            }
-//        });
+        nextbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                uploadQueue();
+            }
+        });
+
+    }
+
+    private void uploadQueue() {
+        getStudents();
+        Log.e("test", "" + IDtoDelete);
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        JsonArrayRequest arrayRequest = new JsonArrayRequest(
+                Request.Method.DELETE,
+                URLDELETE,
+                null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        Toast.makeText(WaitingListActivity.this, "student deleted", Toast.LENGTH_SHORT).show();
+                        Log.d("Response", response.toString());
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e("Error", error.toString());
+                        error.printStackTrace();
+                    }
+                }
+        );
+        requestQueue.add(arrayRequest);
 
     }
 
@@ -95,7 +102,7 @@ public class WaitingListActivity extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         JsonArrayRequest arrayRequest = new JsonArrayRequest(
                 Request.Method.GET,
-                URL,
+                URLGET,
                 null,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -110,7 +117,10 @@ public class WaitingListActivity extends AppCompatActivity {
 
                                 //add a new student to list
 //                                studentItem.add(new user(studentNumbers[i], studentFirstNames[i], studentNames[i]));
-                                studentItem.add(new user(student.getInt("queue"), student.getString("firstName"), student.getString("name")));
+                                studentItem.add(new user(student.getInt("queue"), student.getString("firstName"), student.getString("name"), student.getInt("id")));
+//                                Collections.reverse(studentItem);
+                                IDtoDelete = studentItem.get(0).getId();
+                                test= studentItem.get(0).getName();
                             }
 
                             //set the adapter
