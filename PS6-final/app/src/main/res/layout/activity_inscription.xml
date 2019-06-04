@@ -27,8 +27,10 @@
             <!--app:srcCompat="@drawable/foodget" />-->
 
         <LinearLayout
-            style="@style/linearStyle"
             android:paddingTop="@dimen/fab_padding"
+            android:background="@color/theme1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:paddingBottom="@dimen/fab_padding">
 
 
@@ -39,15 +41,30 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_margin="@dimen/fab_margin"
-            android:background=" #85a4f6 "
+            android:background="@color/theme1l"
             android:layout_width="match_parent"
-            android:layout_height="171dp"
+
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <TextView
+                style="@style/textView_Style"
+                android:textColor="@color/theme1d"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Num. étudiant" />
+
+            <EditText
+                android:id="@+id/textnumetu"
+                style="@style/editText_style"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+            <TextView
                 android:id="@+id/tv_firstname"
                 style="@style/textView_Style"
+                android:textColor="@color/theme1d"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Prénom" />
@@ -62,6 +79,8 @@
 
             <TextView
                 android:id="@+id/tv_name"
+
+                android:textColor="@color/theme1d"
                 style="@style/textView_Style"
                 android:text="Nom" />
 
@@ -70,6 +89,24 @@
                 style="@style/editText_style"
 
                 android:inputType="text" />
+
+            <TextView
+                style="@style/textView_Style"
+
+                android:textColor="@color/theme1d"
+                android:text="Filière " />
+
+            <Spinner
+                android:id="@+id/spinner1"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:outlineAmbientShadowColor="@color/theme1"
+                android:outlineSpotShadowColor="@color/theme1"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
 
         </LinearLayout>
@@ -86,7 +123,7 @@
                 style="@style/buttonStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/colorPrimary"
+                android:backgroundTint="@color/theme1d"
                 android:text="S'inscrire" />
 
         </LinearLayout>

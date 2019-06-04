@@ -1,4 +1,16 @@
 <resources>
     <string name="app_name">PS6</string>
     <string name="title_activity_main">MainActivity</string>
+
+    <string-array name="filiere">
+        <item>SI3</item>
+        <item>SI4</item>
+        <item>GE3</item>
+        <item>GE4</item>
+        <item>GB3</item>
+        <item>GB4</item>
+    </string-array>
+
+    <string name="IPNass">http://10.212.118.135:9428/api/students</string>
+
 </resources>
