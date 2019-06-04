@@ -27,6 +27,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Collections;
+
 import adapter.StudentAdapter;
 import model.user;
 
@@ -68,11 +69,10 @@ public class WaitingListActivity extends AppCompatActivity implements AdapterVie
         spinner.setOnItemSelectedListener(this);
 
 
-        URL = "http://10.212.118.37:9428/api/students";
-        URLGET = "http://10.212.118.37:9428/api/students";
+        URL = "http://10.212.118.135:9428/api/students";
+        URLGET = "http://10.212.118.135:9428/api/students";
         URLDELETE = URLGET + "/" + Long.toString(IDtoDelete);
         //getStudents();
-
 
 
         nextbutton.setOnClickListener(new View.OnClickListener() {
@@ -91,7 +91,7 @@ public class WaitingListActivity extends AppCompatActivity implements AdapterVie
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         JsonArrayRequest arrayRequest = new JsonArrayRequest(
                 Request.Method.DELETE,
-                URLGET +"/"+ Long.toString(IDtoDelete),
+                URLGET + "/" + Long.toString(IDtoDelete),
                 null,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -173,12 +173,16 @@ public class WaitingListActivity extends AppCompatActivity implements AdapterVie
 
     private ArrayList<user> filterStudent(String filiere) {
         ArrayList<user> studentItemFiltered = new ArrayList<>();
-        if(filiere.equals("ALL")){
+        if (filiere.equals("ALL")) {
             studentItemFiltered = studentItem;
-            mTextViewStudent.append("Etudiant en cours de traitement: \n"+studentItemFiltered.get(0).getFirstName()+" "+studentItemFiltered.get(0).getName());
-            IDtoDelete = studentItemFiltered.get(0).getId();
+            mTextViewStudent.append("Etudiant en cours de traitement: \n" + studentItemFiltered.get(0).getFirstName() + " " + studentItemFiltered.get(0).getName());
+            if (studentItemFiltered.size() != 0) {
+                IDtoDelete = studentItemFiltered.get(0).getId();
+            }
+            else{IDtoDelete = -1;}
 
-            return studentItem;}
+            return studentItem;
+        }
         for (int i = 0; i < studentItem.size(); i++) {
             if (studentItem.get(i).getEducationStream().equals(filiere)) {
                 studentItemFiltered.add(studentItem.get(i));
@@ -188,13 +192,17 @@ public class WaitingListActivity extends AppCompatActivity implements AdapterVie
 
         IDtoDelete = studentItemFiltered.get(0).getId();
 
-        mTextViewStudent.append("Etudiant en cours de traitement: \n"+studentItemFiltered.get(0).getFirstName()+" "+studentItemFiltered.get(0).getName());
+        if (studentItemFiltered.size() == 0) {
+            mTextViewStudent.append("Aucun étudiant en cours de traiement ");
+        } else {
+            mTextViewStudent.append("Etudiant en cours de traitement: \n" + studentItemFiltered.get(0).getFirstName() + " " + studentItemFiltered.get(0).getName());
+        }
 
         return studentItemFiltered;
 
 
-
     }
+
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         String text = parent.getItemAtPosition(position).toString();
