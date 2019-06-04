@@ -30,8 +30,9 @@
             android:paddingTop="@dimen/fab_padding">
 
             <TextView
-                android:id="@+id/tv_listes"
-                style="@style/textView_Style" />
+                android:id="@+id/tv_waitingliste"
+                style="@style/textView_Style"
+                tools:text="LISTE D'ATTENTE BRI" />
 
 
         </LinearLayout>
@@ -39,13 +40,13 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="366dp"
             android:padding="@dimen/fab_padding">
 
             <ListView
                 android:id="@+id/waiting_list"
                 android:layout_width="match_parent"
-                android:layout_height="199dp"
+                android:layout_height="345dp"
                 android:layout_weight="1" />
 
         </LinearLayout>
@@ -57,9 +58,18 @@
             android:orientation="horizontal">
 
             <Button
+                android:id="@+id/uploadButton"
+                style="@style/buttonStyle"
+                android:layout_width="145dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="@color/colorPrimary"
+                android:text="Actualiser" />
+
+            <Button
                 android:id="@+id/nextButton"
                 style="@style/buttonStyle"
-                android:layout_width="match_parent"
+                android:layout_width="171dp"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/colorPrimary"
                 android:text="Suivant" />

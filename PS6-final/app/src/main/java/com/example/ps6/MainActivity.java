@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Button buttonParse = findViewById(R.id.button_parse);
         mTextViewResult = findViewById(R.id.text_view_result);
-        URL = "http://192.168.1.69:9428/api/students";
+        URL = "http://10.212.115.202:9428/api/students";
 
         requestQueue = Volley.newRequestQueue(this);
 
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
                                 }
 
                                 Log.d("Response", response.toString());
-//                        Toast.makeText(MainActivity.this, "iste d'attente actualisé", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "Liste d'attente actualisée", Toast.LENGTH_SHORT).show();
                             }
                         },
                         new Response.ErrorListener() {
