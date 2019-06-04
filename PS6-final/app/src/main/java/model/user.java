@@ -39,4 +39,8 @@ public class user {
     public String getEducationStream() {
         return educationStream;
     }
+
+    public void setQueueNumber(int queueNumber) {
+        this.queueNumber = queueNumber;
+    }
 }

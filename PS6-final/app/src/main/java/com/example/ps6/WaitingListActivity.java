@@ -183,6 +183,11 @@ public class WaitingListActivity extends AppCompatActivity implements AdapterVie
             }
 
         }
+        for (int i = 0; i < studentItemFiltered.size(); i++){
+            studentItemFiltered.get(i).setQueueNumber(i+1);
+        }
+
+
 
 
         if (studentItemFiltered.size() != 0) {
@@ -206,6 +211,7 @@ public class WaitingListActivity extends AppCompatActivity implements AdapterVie
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
         filiere = text;
         getStudents();
+
 
     }
 
