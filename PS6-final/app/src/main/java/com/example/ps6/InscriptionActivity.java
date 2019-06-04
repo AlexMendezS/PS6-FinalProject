@@ -81,7 +81,7 @@ public class InscriptionActivity extends AppCompatActivity {
                 requestQueue.add(jsonObjReq);
 
 
-                Intent newIntent = new Intent(InscriptionActivity.this, MainActivity.class);
+                Intent newIntent = new Intent(InscriptionActivity.this, StudentActivity.class);
                 startActivity(newIntent);
 
             }

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".StudentActivity">
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        style="@style/linearStyle"
+        android:paddingTop="@dimen/fab_padding"
+        android:paddingBottom="@dimen/fab_padding"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="10dp">
+
+
+        <TextView
+            style="@style/textView_Style"
+            android:text="Vous êtes ajouté sur la liste d'attente" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="367dp"
+        android:layout_height="74dp"
+        android:paddingTop="@dimen/fab_padding"
+        android:paddingBottom="@dimen/fab_padding"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Votre position dans la file est: X"
+            android:textAppearance="@style/BottomNavigationView" />
+
+
+    </LinearLayout>
+
+
+</android.support.constraint.ConstraintLayout>
