@@ -77,7 +77,7 @@ public class WaitingListActivity extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         JsonArrayRequest arrayRequest = new JsonArrayRequest(
                 Request.Method.DELETE,
-                URLGET + Long.toString(IDtoDelete),
+                URLGET +"/"+ Long.toString(IDtoDelete),
                 null,
                 new Response.Listener<JSONArray>() {
                     @Override
