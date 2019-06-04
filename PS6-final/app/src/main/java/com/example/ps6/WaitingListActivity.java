@@ -71,7 +71,7 @@ public class WaitingListActivity extends AppCompatActivity implements AdapterVie
         URL = "http://10.212.118.37:9428/api/students";
         URLGET = "http://10.212.118.37:9428/api/students";
         URLDELETE = URLGET + "/" + Long.toString(IDtoDelete);
-        getStudents();
+        //getStudents();
 
 
 
@@ -147,7 +147,7 @@ public class WaitingListActivity extends AppCompatActivity implements AdapterVie
 
 
                             //set the adapter
-                            mTextViewStudent.append("Etudiant en cours de traitement"+studentItem.get(0).getFirstName()+" "+studentItem.get(0).getFirstName());
+                            mTextViewStudent.append("Etudiant en cours de traitement: \n"+studentItem.get(0).getFirstName()+" "+studentItem.get(0).getName());
                             StudentAdapter myadapter = new StudentAdapter(WaitingListActivity.this, R.layout.student, filterStudent(filiere));
                             mylistView.setAdapter(myadapter);
 
