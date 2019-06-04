@@ -1,5 +1,6 @@
 package com.example.ps6;
 
+import android.app.VoiceInteractor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,9 +29,9 @@ import model.user;
 
 public class WaitingListActivity extends AppCompatActivity {
 
-    private RequestQueue requestQueue;
+    //private RequestQueue requestQueue;
     private String URL;
-    private ArrayList<user> studentItem = new ArrayList<>();
+    private ArrayList<user> studentItem;
     private ListView mylistView;
     private int[] studentNumbers;
     private String[] studentFirstNames;
@@ -41,6 +42,7 @@ public class WaitingListActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
 
+        studentItem = new ArrayList<>();
         setContentView(R.layout.activity_waitinglist);
         Button nextbutton = findViewById(R.id.nextButton);
         Button uploadbutton = findViewById(R.id.uploadButton);
@@ -48,7 +50,7 @@ public class WaitingListActivity extends AppCompatActivity {
         mylistView = findViewById(R.id.waiting_list);
         URL = "http://10.212.115.202:9428/api/students";
 
-        requestQueue = Volley.newRequestQueue(this);
+    //    requestQueue = Volley.newRequestQueue(this);
         getStudents();
 
         uploadbutton.setOnClickListener(new View.OnClickListener() {
@@ -68,7 +70,8 @@ public class WaitingListActivity extends AppCompatActivity {
     }
 
     private void getStudents() {
-//        studentItem.clear();
+        studentItem.clear();
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
         JsonArrayRequest arrayRequest = new JsonArrayRequest(
                 Request.Method.GET,
                 URL,
@@ -88,6 +91,11 @@ public class WaitingListActivity extends AppCompatActivity {
 //                                studentItem.add(new user(studentNumbers[i], studentFirstNames[i], studentNames[i]));
                                 studentItem.add(new user(student.getInt("queue"), student.getString("firstName"), student.getString("name")));
                             }
+
+                            //set the adapter
+                            StudentAdapter myadapter = new StudentAdapter(WaitingListActivity.this, R.layout.student, studentItem);
+                            mylistView.setAdapter(myadapter);
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -107,9 +115,7 @@ public class WaitingListActivity extends AppCompatActivity {
 
         requestQueue.add(arrayRequest);
 
-        //set the adapter
-        StudentAdapter myadapter = new StudentAdapter(WaitingListActivity.this, R.layout.student, studentItem);
-        mylistView.setAdapter(myadapter);
+
 
 
     }

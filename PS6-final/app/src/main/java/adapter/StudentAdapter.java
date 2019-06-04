@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.example.ps6.R;
 import com.example.ps6.WaitingListActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import model.user;
@@ -21,34 +22,38 @@ public class StudentAdapter extends ArrayAdapter<user> {
 
     private Context context;
     private int resource;
-    private List<user> objects;
+    private ArrayList<user> students;
     private static String TAG = "StudentAdapter";
 
-    public StudentAdapter(Context context, int resource, List<user> objects) {
-        super(context, resource, objects);
+    public StudentAdapter(Context context, int resource, ArrayList<user> students) {
+        super(context, resource, students);
         this.context = context;
         this.resource = resource;
-        this.objects = objects;
+        this.students = students;
     }
 
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        View view = convertView;
+        if (view == null)
+            view = LayoutInflater.from(context).inflate(resource, parent, false);
+
+        user newstudent = students.get(position);
+
         //Set the student informations
-        int queueNumber = getItem(position).getQueueNumber();
+        int queueNumber = newstudent.getQueueNumber();
         String strStudentQueueNbr = Integer.toString(queueNumber);
-        String firstName = getItem(position).getFirstName();
-        String name = getItem(position).getName();
+        String firstName = newstudent.getFirstName();
+        String name = newstudent.getName();
 
         //Create the student object with the information
-        user student = new user(queueNumber, firstName, name);
+//        user student = new user(queueNumber, firstName, name);
 
-        LayoutInflater layoutInflater = LayoutInflater.from(context);
-        convertView = layoutInflater.inflate(resource, parent, false);
 
-        TextView tvName = convertView.findViewById(R.id.nameView);
-        TextView tvNumber = convertView.findViewById(R.id.numberView);
-        Button tvButton = convertView.findViewById(R.id.deleteStudent);
+        TextView tvName = view.findViewById(R.id.nameView);
+        TextView tvNumber = view.findViewById(R.id.numberView);
+        Button tvButton = view.findViewById(R.id.deleteStudent);
 
 //        tvButton.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -60,6 +65,6 @@ public class StudentAdapter extends ArrayAdapter<user> {
         tvName.append(firstName + " " + name);
         tvNumber.setText(strStudentQueueNbr);
 
-        return convertView;
+        return view;
     }
 }
