@@ -11,6 +11,7 @@
         style="@style/linearStyle"
         android:layout_marginTop="8dp"
         android:paddingTop="@dimen/fab_padding"
+        android:background="@color/theme1"
         android:paddingBottom="@dimen/fab_padding"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints"
@@ -24,7 +25,18 @@
 
     </LinearLayout>
 
+
+    <ImageView
+        android:layout_width="287dp"
+        android:layout_height="138dp"
+        android:layout_gravity="center"
+        android:src="@drawable/logo"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="62dp"
+        tools:layout_editor_absoluteY="540dp" />
+
     <LinearLayout
+        android:id="@+id/layout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -37,16 +49,17 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
         tools:ignore="MissingConstraints">
 
+
         <Button
             android:id="@+id/StudentButton"
             style="@style/buttonStyle"
-            android:backgroundTint="@color/colorPrimary"
+            android:backgroundTint="@color/theme1d"
             android:text="Etudiant" />
 
         <Button
             android:id="@+id/AdminButton"
             style="@style/buttonStyle"
-            android:backgroundTint="@color/colorPrimary"
+            android:backgroundTint="@color/theme1d"
             android:text="Administration" />
 
 

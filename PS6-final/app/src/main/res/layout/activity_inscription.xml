@@ -39,7 +39,9 @@
 
             <TextView
                 style="@style/textView_Style"
-                android:text="FILE D'ATTENTE" />
+                android:textSize="30dp"
+                android:text="Liste d'attente "
+                android:textStyle="bold" />
 
 
         </LinearLayout>
