@@ -1,6 +1,5 @@
 package com.example.ps6;
 
-import android.app.VoiceInteractor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -26,15 +25,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Collections;
-
 import adapter.StudentAdapter;
 import model.user;
 
 public class WaitingListActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private String URLGET;
-    private String URL;
     private String URLDELETE;
     private ArrayList<user> studentItem;
     private ListView mylistView;
@@ -43,10 +39,6 @@ public class WaitingListActivity extends AppCompatActivity implements AdapterVie
 
     private Spinner spinner;
     private String filiere;
-
-    private int[] studentNumbers;
-    private String[] studentFirstNames;
-    private String[] studentNames;
     private long IDtoDelete;
 
     @Override
@@ -75,16 +67,13 @@ public class WaitingListActivity extends AppCompatActivity implements AdapterVie
         nextbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                getStudents();
                 uploadQueue();
             }
         });
-
     }
 
     private void uploadQueue() {
-        //getStudents();
-        Log.e("test", "" + IDtoDelete);
+//        Log.e("test", "" + IDtoDelete);
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         JsonArrayRequest arrayRequest = new JsonArrayRequest(
                 Request.Method.DELETE,
@@ -107,9 +96,14 @@ public class WaitingListActivity extends AppCompatActivity implements AdapterVie
         );
         requestQueue.add(arrayRequest);
         mTextViewStudent.setText("");
+
+        ArrayList<user> studentsToUpdate = filterStudent(filiere);
+        for(int i=0; i< studentsToUpdate.size(); i++) {
+            user studentToUpdate = studentsToUpdate.get(i);
+            studentToUpdate.setQueueNumber(studentToUpdate.getQueueNumber()-1);
+            updateStudent(studentToUpdate);
+        }
         getStudents();
-
-
     }
 
     private void getStudents() {
@@ -127,16 +121,13 @@ public class WaitingListActivity extends AppCompatActivity implements AdapterVie
                             for (int i = 0; i < response.length(); i++) {
                                 JSONObject student = response.getJSONObject(i);
 
-//                                studentNumbers[i] = student.getInt("studentNumber");
-//                                studentFirstNames[i] = student.getString("firstName");
-//                                studentNames[i] = student.getString("name");
-
                                 //add a new student to list
-//                                studentItem.add(new user(studentNumbers[i], studentFirstNames[i], studentNames[i]));
 //                                studentItem.add(new user(student.getInt("queue"), student.getString("firstName"), student.getString("name"), student.getString("educationStream"), student.getLong("id")));
-                                studentItem.add(new user(i+1, student.getString("firstName"), student.getString("name"), student.getString("educationStream"), student.getLong("id")));
-
+                                studentItem.add(new user(i+1, student.getInt("studentNumber"),student.getString("firstName"), student.getString("name"), student.getString("educationStream"), student.getLong("id")));
                             }
+//                            user finalStudent = studentItem.get(studentItem.size()-1);
+//                            finalStudent.setQueueNumber(finalStudent.getQueueNumber()-1);
+//                            updateStudent(finalStudent);
 
                             //set the adapter
                             StudentAdapter myadapter = new StudentAdapter(WaitingListActivity.this, R.layout.student, filterStudent(filiere));
@@ -163,6 +154,57 @@ public class WaitingListActivity extends AppCompatActivity implements AdapterVie
 
     }
 
+
+    private void updateStudent(user student){
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        JSONObject putparams = new JSONObject();
+        try {
+            putparams.put("firstName", student.getFirstName());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        try {
+            putparams.put("educationStream", student.getEducationStream());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            putparams.put("name", student.getName());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        try {
+            putparams.put("studentNumber",  student.getStudentNumber());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }try {
+            putparams.put("queue", student.getQueueNumber());
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.PUT,
+                URLGET + "/" + Long.toString(student.getId()), putparams,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.d("Response", response.toString());
+//                        Toast.makeText(WaitingListActivity.this, "Position dans la file d'attente : "+position, Toast.LENGTH_LONG).show();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e("Error", error.toString());
+                        error.printStackTrace();
+                    }
+                });
+
+        requestQueue.add(jsonObjReq);
+    }
+
+
     private ArrayList<user> filterStudent(String filiere) {
         ArrayList<user> studentItemFiltered = new ArrayList<>();
         if (filiere.equals("ALL")) {
@@ -188,8 +230,6 @@ public class WaitingListActivity extends AppCompatActivity implements AdapterVie
         }
 
 
-
-
         if (studentItemFiltered.size() != 0) {
             IDtoDelete = studentItemFiltered.get(0).getId();
 
@@ -201,7 +241,6 @@ public class WaitingListActivity extends AppCompatActivity implements AdapterVie
 
         return studentItemFiltered;
 
-
     }
 
     @Override
@@ -211,8 +250,6 @@ public class WaitingListActivity extends AppCompatActivity implements AdapterVie
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
         filiere = text;
         getStudents();
-
-
     }
 
     @Override

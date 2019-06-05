@@ -10,7 +10,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -19,7 +18,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
@@ -27,10 +25,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
-import adapter.StudentAdapter;
 import model.user;
 
 public class InscriptionActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
@@ -43,7 +37,6 @@ public class InscriptionActivity extends AppCompatActivity implements AdapterVie
     private Button inscriptionButton;
     private RequestQueue requestQueue;
     private String URL;
-
 
     private ArrayList<user> studentItem;
     ArrayList<user> studentItemFiltered;
@@ -127,15 +120,10 @@ public class InscriptionActivity extends AppCompatActivity implements AdapterVie
 
                 requestQueue.add(jsonObjReq);
 
-
-
                 Intent newIntent = new Intent(InscriptionActivity.this, WelcomeActivity.class);
                 startActivity(newIntent);
-
             }
         });
-
-
     }
 
 
@@ -153,25 +141,9 @@ public class InscriptionActivity extends AppCompatActivity implements AdapterVie
                             for (int i = 0; i < response.length(); i++) {
                                 JSONObject student = response.getJSONObject(i);
 
-//                                studentNumbers[i] = student.getInt("studentNumber");
-//                                studentFirstNames[i] = student.getString("firstName");
-//                                studentNames[i] = student.getString("name");
-
                                 //add a new student to list
-//                                studentItem.add(new user(studentNumbers[i], studentFirstNames[i], studentNames[i]));
-                                studentItem.add(new user(student.getInt("queue"), student.getString("firstName"), student.getString("name"), student.getString("educationStream"), student.getLong("id")));
-//                                Collections.reverse(studentItem);
-//                                test= studentItem.get(0).getName();
+                                studentItem.add(new user(student.getInt("queue"), student.getInt("studentNumber"), student.getString("firstName"), student.getString("name"), student.getString("educationStream"), student.getLong("id")));
                             }
-
-
-                            //filter
-
-//                            test = studentItem.get(0).getQueueNumber();
-
-
-                            //set the adapter
-
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -203,21 +175,14 @@ public class InscriptionActivity extends AppCompatActivity implements AdapterVie
             if (studentItem.get(i).getEducationStream().equals(filiere)) {
                 studentItemFiltered.add(studentItem.get(i));
             }
-
         }
-
         return studentItemFiltered;
-
-
-
     }
 
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        String text = parent.getItemAtPosition(position).toString();
-        filiere = text;
-
+        filiere = parent.getItemAtPosition(position).toString();
     }
 
     @Override

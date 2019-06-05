@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center_horizontal">
-    <!--tools:context=".fragments.TabMainMenu>-->
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -17,12 +16,6 @@
         android:orientation="vertical"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="95dp">
-
-        <!--<ImageView-->
-            <!--android:id="@+id/imageView3"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--app:srcCompat="@drawable/foodget" />-->
 
         <LinearLayout
             android:paddingTop="@dimen/fab_padding"
@@ -110,7 +103,7 @@
                 android:layout_margin="@dimen/fab_margin"
                 android:layout_weight="1"
                 android:padding="@dimen/fab_padding"
-                android:textSize="20dp" />
+                android:textSize="22dp" />
         </LinearLayout>
 
         <LinearLayout

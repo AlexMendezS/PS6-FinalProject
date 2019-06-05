@@ -3,6 +3,7 @@ package model;
 public class user {
 
     private int queueNumber;
+    private int studentNumber;
     private String firstName;
     private String name;
     private String educationStream;
@@ -14,8 +15,9 @@ public class user {
         this.name = name;
         this.id = id;
     }
-    public user (int queueNumber, String firstName, String name, String educationStream,long id){
+    public user (int queueNumber, int studentNumber, String firstName, String name, String educationStream,long id){
         this.queueNumber = queueNumber;
+        this.studentNumber = studentNumber;
         this.firstName = firstName;
         this.name = name;
         this.educationStream = educationStream;
@@ -24,6 +26,10 @@ public class user {
 
     public int getQueueNumber() {
         return queueNumber;
+    }
+
+    public int getStudentNumber() {
+        return studentNumber;
     }
 
     public String getFirstName() {
