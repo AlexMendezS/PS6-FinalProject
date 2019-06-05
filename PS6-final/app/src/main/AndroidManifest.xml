@@ -15,7 +15,7 @@
         <activity android:name=".AdminActivity"></activity>
         <activity android:name=".WaitingListActivity"></activity>
         <activity android:name=".StudentActivity" />
-        <activity android:name=".InscriptionActivity" />
+        <activity android:name=".InscriptionActivity"  />
         <activity android:name=".MainActivity" />
         <activity
             android:name=".WelcomeActivity"

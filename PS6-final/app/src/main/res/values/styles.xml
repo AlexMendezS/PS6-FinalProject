@@ -62,4 +62,15 @@
         <item name="android:textSize">20sp</item>
     </style>
 
+    <style name="MyEditText" parent="Theme.AppCompat.Light">
+        <item name="actionBarStyle">@style/Widget.AppCompat.EditText</item>
+        <item name="colorControlNormal">@color/theme1t</item>
+        <item name="colorControlActivated">@color/theme1d</item>
+        <item name="hintTextAppearance">@color/theme1t</item>
+        <item name="errorTextAppearance">@color/theme1t</item>
+        <item name="android:textColor">@color/theme1t</item>
+        <item name="android:textColorHint">@color/theme1t</item>
+        <item name="colorControlHighlight">@color/theme1t</item>
+    </style>
+
 </resources>

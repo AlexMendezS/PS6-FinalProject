@@ -60,7 +60,6 @@ public class WaitingListActivity extends AppCompatActivity implements AdapterVie
         spinner.setOnItemSelectedListener(this);
 
 
-        URL = "http://10.212.118.135:9428/api/students";
         URLGET = "http://10.212.118.135:9428/api/students";
         URLDELETE = URLGET + "/" + Long.toString(IDtoDelete);
 

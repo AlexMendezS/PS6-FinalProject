@@ -4,120 +4,174 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center_horizontal">
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
     <!--tools:context=".fragments.TabMainMenu>-->
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:background="#ffff"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
+        android:background="@color/theme1l"
         android:orientation="vertical"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="95dp"
-        android:layout_marginTop="@dimen/fab_margin"
+
 
         >
 
+
         <!--<ImageView-->
-            <!--android:id="@+id/imageView3"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--app:srcCompat="@drawable/foodget" />-->
+        <!--android:id="@+id/imageView3"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--app:srcCompat="@drawable/foodget" />-->
 
         <LinearLayout
-            android:paddingTop="@dimen/fab_padding"
-            android:background="@color/theme1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/theme1"
+            android:paddingTop="@dimen/fab_padding"
             android:paddingBottom="@dimen/fab_padding">
 
 
-            <TextView style="@style/textView_Style"
-                android:text="LISTE D'ATTENTE BRI"/>
+            <TextView
+                style="@style/textView_Style"
+                android:text="FILE D'ATTENTE" />
 
 
         </LinearLayout>
 
         <LinearLayout
-            android:background="@color/theme1l"
             android:layout_width="match_parent"
-            android:paddingTop="20dp"
-
             android:layout_height="wrap_content"
-            android:paddingBottom="20dp"
-            android:orientation="vertical">
+            android:background="@color/theme1l"
 
-            <TextView
-                style="@style/textView_Style"
-                android:textColor="@color/theme1t"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Num. étudiant" />
+            android:orientation="vertical"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp">
 
-            <EditText
-                android:id="@+id/textnumetu"
-                style="@style/editText_style"
 
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text" />
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:id="@+id/layout1">
+
+                    <TextView
+                        style="@style/textView_Style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Num. étudiant"
+                        android:textColor="@color/theme1t" />
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp">
+
+                        <EditText
+                            android:id="@+id/textnumetu"
+                            style="@style/editText_style"
+
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:hint="Num. étudiant"
+                            android:inputType="text" />
+                    </android.support.design.widget.TextInputLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_toRightOf="@+id/layout1"
+                    android:layout_marginLeft="50dp">
+                <TextView
+                    style="@style/textView_Style"
+                    android:text="Filière "
+                    android:textColor="@color/theme1t" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="19dp"
+                    android:background="@color/theme1t">
+
+                    <Spinner
+                        android:id="@+id/spinner1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="28dp"
+                        android:layout_gravity="center"
+                        android:outlineAmbientShadowColor="@color/theme1"
+                        android:outlineSpotShadowColor="@color/theme1"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </LinearLayout>
+                </LinearLayout>
+            </RelativeLayout>
+
             <TextView
                 android:id="@+id/tv_firstname"
                 style="@style/textView_Style"
-                android:textColor="@color/theme1t"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Prénom" />
+                android:text="Prénom"
+                android:textColor="@color/theme1t" />
 
-            <EditText
-                android:id="@+id/textfirstname"
-                style="@style/editText_style"
 
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text" />
+                android:layout_height="50dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp">
+
+                <EditText
+                    android:id="@+id/textfirstname"
+                    style="@style/editText_style"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="Prenom"
+                    android:inputType="text" />
+            </android.support.design.widget.TextInputLayout>
 
             <TextView
                 android:id="@+id/tv_name"
 
-                android:textColor="@color/theme1t"
                 style="@style/textView_Style"
-                android:text="Nom" />
+                android:text="Nom"
+                android:textColor="@color/theme1t" />
 
-            <EditText
-                android:id="@+id/textnewname"
-                style="@style/editText_style"
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp">
 
-                android:inputType="text" />
+                <EditText
+                    android:id="@+id/textnewname"
+                    style="@style/editText_style"
 
-            <TextView
-                style="@style/textView_Style"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="Nom"
+                    android:inputType="text" />
 
-                android:textColor="@color/theme1t"
-                android:text="Filière " />
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/theme1t"
-                android:layout_gravity="center">
-                <Spinner
-                android:id="@+id/spinner1"
-                android:layout_width="wrap_content"
-                android:layout_gravity="center"
-                android:outlineAmbientShadowColor="@color/theme1"
-                android:outlineSpotShadowColor="@color/theme1"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-            </LinearLayout>
-
+            </android.support.design.widget.TextInputLayout>
 
 
         </LinearLayout>

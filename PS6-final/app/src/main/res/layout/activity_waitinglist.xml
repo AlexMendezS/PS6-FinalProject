@@ -96,6 +96,7 @@
             android:orientation="horizontal">
 
             <TextView
+                android:gravity="center"
                 android:id="@+id/tv_student"
                 android:background="@color/theme1l"
                 android:layout_width="185dp"
@@ -115,7 +116,9 @@
             <Button
                 android:id="@+id/nextButton"
                 style="@style/buttonStyle"
-                android:layout_width="383dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/theme1"
 
