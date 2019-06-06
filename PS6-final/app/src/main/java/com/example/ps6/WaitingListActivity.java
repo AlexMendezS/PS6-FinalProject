@@ -1,5 +1,6 @@
 package com.example.ps6;
 
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -36,6 +37,8 @@ public class WaitingListActivity extends AppCompatActivity implements AdapterVie
     private ListView mylistView;
     ArrayList<user> studentItemFiltered;
     TextView mTextViewStudent;
+    final Handler handler = new Handler();
+
 
     private Spinner spinner;
     private String filiere;
@@ -60,7 +63,7 @@ public class WaitingListActivity extends AppCompatActivity implements AdapterVie
         spinner.setOnItemSelectedListener(this);
 
 
-        URLGET = "http://10.212.118.135:9428/api/students";
+        URLGET = "http://192.168.43.91:9428/api/students";
         URLDELETE = URLGET + "/" + Long.toString(IDtoDelete);
 
         nextbutton.setOnClickListener(new View.OnClickListener() {
@@ -69,6 +72,16 @@ public class WaitingListActivity extends AppCompatActivity implements AdapterVie
                 uploadQueue();
             }
         });
+
+        handler.postDelayed(new Runnable(){
+            @Override
+            public void run(){
+                getStudents();
+                handler.postDelayed(this, 5000);
+
+            }
+        }, 2000);
+
     }
 
     private void uploadQueue() {
@@ -137,7 +150,7 @@ public class WaitingListActivity extends AppCompatActivity implements AdapterVie
                         }
 
                         Log.d("Response", response.toString());
-                        Toast.makeText(WaitingListActivity.this, "Liste d'attente actualisée", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(WaitingListActivity.this, "Liste d'attente actualisée", Toast.LENGTH_SHORT).show();
                     }
                 },
                 new Response.ErrorListener() {
@@ -255,6 +268,7 @@ public class WaitingListActivity extends AppCompatActivity implements AdapterVie
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
+
 
 
 }
