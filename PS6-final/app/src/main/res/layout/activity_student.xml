@@ -7,6 +7,30 @@
     tools:context=".StudentActivity">
 
 
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="102dp"
+        android:layout_marginBottom="192dp"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout10"
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="161dp" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout11"
+        android:layout_width="match_parent"
+        android:layout_height="699dp"
+        android:layout_marginTop="32dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+    </LinearLayout>
+
     <LinearLayout
         android:id="@+id/linearLayout3"
         style="@style/linearStyle"
@@ -20,6 +44,8 @@
         <TextView
             style="@style/textView_Style"
             android:text="Vous êtes ajouté sur la liste d'attente" />
+
+
 
 
     </LinearLayout>
@@ -36,24 +62,23 @@
         app:layout_constraintVertical_bias="0.261"
         tools:ignore="MissingConstraints">
 
-        <TextView
-            android:id="@+id/pos"
+        <EditText
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Votre position dans la file est: X"
-            android:textAppearance="@style/BottomNavigationView" />
+            android:id="@+id/nom"/>
 
 
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/linearLayout10"
         android:layout_width="405dp"
         android:layout_height="93dp"
         android:layout_marginTop="296dp"
         android:padding="@dimen/fab_padding"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="1dp"
-        tools:ignore="MissingConstraints">
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="1dp">
 
         <ListView
             android:id="@+id/list"
@@ -61,7 +86,9 @@
             android:layout_height="50dp"
             android:layout_weight="1" />
 
+
     </LinearLayout>
+
 
 
 

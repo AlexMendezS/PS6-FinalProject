@@ -71,7 +71,7 @@ public class InscriptionActivity extends AppCompatActivity implements AdapterVie
             public void onClick(View v) {
 
 
-                Intent newIntent = new Intent(InscriptionActivity.this, CheckActivity.class);
+                Intent newIntent = new Intent(InscriptionActivity.this, StudentActivity.class);
                 startActivity(newIntent);
 
             }
@@ -163,7 +163,7 @@ public class InscriptionActivity extends AppCompatActivity implements AdapterVie
                         }
 
                         Log.d("Response", response.toString());
-                        Toast.makeText(InscriptionActivity.this, "Liste d'attente actualisée", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(InscriptionActivity.this, "Liste d'attente actualisée", Toast.LENGTH_SHORT).show();
                     }
                 },
                 new Response.ErrorListener() {

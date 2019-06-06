@@ -65,20 +65,18 @@
                 android:backgroundTint="@color/design_default_color_primary_dark"
                 android:text="Consulter sa place " />
 
+            <TextView
+                android:id="@+id/TextView_Check"
+                android:layout_width="match_parent"
+                android:layout_height="484dp"
+                android:textSize="80px"
+                android:textStyle="bold"
+                android:textColor="@android:color/holo_blue_dark"/>
+
         </LinearLayout>
 
 
-        <TextView
-            android:id="@+id/positionNotification"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/TextAppearance.AppCompat.Display1"
-            android:text="Bonjour Nom Prenom, Position file d'attente SI3:\n
-            I.\n
 
-
-
-               Temps d'attente estimé :\n "/>
 
     </LinearLayout>
 
