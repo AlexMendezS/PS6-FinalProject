@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CheckActivity">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="95dp"
+
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/theme1"
+            android:paddingTop="@dimen/fab_padding"
+            android:paddingBottom="@dimen/fab_padding">
+
+
+            <TextView
+                style="@style/textView_Style"
+                android:text="Position liste d'attente  "
+                android:textSize="30dp"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp">
+
+                <EditText
+                    android:id="@+id/checknumetu"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="Num. étudiant"
+                    android:inputType="text" />
+
+
+            </android.support.design.widget.TextInputLayout>
+
+            <Button
+                android:id="@+id/checkNumButton"
+                style="@style/buttonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/design_default_color_primary_dark"
+                android:text="Consulter sa place " />
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/positionNotification"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/TextAppearance.AppCompat.Display1"
+            android:text="Bonjour Nom Prenom, Position file d'attente SI3:\n
+            I.\n
+
+
+
+               Temps d'attente estimé :\n "/>
+
+    </LinearLayout>
+
+
+</android.support.constraint.ConstraintLayout>

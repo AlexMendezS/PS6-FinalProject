@@ -35,6 +35,7 @@ public class InscriptionActivity extends AppCompatActivity implements AdapterVie
     private int position;
     private Spinner spinner;
     private Button inscriptionButton;
+    private Button checkButton;
     private RequestQueue requestQueue;
     private String URL;
 
@@ -48,6 +49,7 @@ public class InscriptionActivity extends AppCompatActivity implements AdapterVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inscription);
         inscriptionButton = findViewById(R.id.inscriptionButton);
+        checkButton = findViewById(R.id.CheckButton);
         studentItem = new ArrayList<>();
         name = findViewById(R.id.textnewname);
         studentNumber = findViewById(R.id.textnumetu);
@@ -63,6 +65,17 @@ public class InscriptionActivity extends AppCompatActivity implements AdapterVie
         spinner.setOnItemSelectedListener(this);
 
         getStudents();
+
+        checkButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                Intent newIntent = new Intent(InscriptionActivity.this, CheckActivity.class);
+                startActivity(newIntent);
+
+            }
+        });
 
         inscriptionButton.setOnClickListener(new View.OnClickListener() {
             @Override
